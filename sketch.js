@@ -99,6 +99,12 @@ function movimentaRaqueteOponente(){
   if (keyIsDown(83)){
     yRaqueteOponente += 10;  
 }
+  if (yRaqueteOponente >= 400){ 
+  yRaqueteOponente = 400;
+  }
+  if (yRaqueteOponente <= 0){ 
+  yRaqueteOponente = 0;
+  }
 }
 
 function colisãoRaquete(){
