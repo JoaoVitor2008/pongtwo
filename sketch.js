@@ -42,10 +42,7 @@ function setup() {
 }
 
 function draw() {
-   var ctx = (a canvas context);
-  ctx.canvas.width  = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
-    background(0);
+    background("Pink");
     mostraBolinha();
     movimentaBolinha();
     colisãoBorda();
