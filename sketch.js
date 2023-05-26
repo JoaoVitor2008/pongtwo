@@ -79,6 +79,19 @@ function colisãoBorda(){
   
 }
 
+function colisaoBordadaRaquete(){
+  if (yRaquete + raio > width ||
+    yRaquete -raio < 0)
+  {yRaquete *= -1;
+  }
+  
+  if (yRaquete +raio > height ||
+     yRaquete - raio < 0){
+    yRaquete *= -1;
+  }
+  
+}
+
 function mostraRaquete(x, y){
   rect(x, y, raqueteComprimento, raqueteAltura);
 }
