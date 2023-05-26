@@ -37,7 +37,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(1350, 650);
+  createCanvas(1000, 400);
   trilha.loop();
 }
 
@@ -76,6 +76,7 @@ function colisãoBorda(){
      yBolinha - raio < 0){
     velocidadeyBolinha *= -1;
   }
+  
 }
 
 function mostraRaquete(x, y){
