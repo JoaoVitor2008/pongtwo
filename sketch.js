@@ -37,11 +37,14 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(1440, 300);
+  createCanvas(1440, 1440);
   trilha.loop();
 }
 
 function draw() {
+   var ctx = (a canvas context);
+  ctx.canvas.width  = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
     background(0);
     mostraBolinha();
     movimentaBolinha();
