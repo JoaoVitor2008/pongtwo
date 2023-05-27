@@ -42,7 +42,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background("Pink");
   mostraBolinha();
   movimentaBolinha();
   colisãoBorda();
