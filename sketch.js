@@ -23,14 +23,14 @@ let colidiu = false;
 
 //placar do jogo
 let meusPontos = 0;
-let pontosDoOponente= 0;
+let pontosDoOponente = 0;
 
 //sons do jogo
 let raquetada;
 let ponto;
 let trilha;
 
-function preload(){
+function preload() {
   trilha = loadSound("trilha.mp3");
   ponto = loadSound("ponto.mp3");
   raquetada = loadSound("raquetada.mp3");
@@ -42,80 +42,79 @@ function setup() {
 }
 
 function draw() {
-    background("Pink");
-    mostraBolinha();
-    movimentaBolinha();
-    colisãoBorda();
-    mostraRaquete(xRaquete, yRaquete);
-    movimentaRaquete();
-    //colisãoRaquete();
-    colisãoRaquete(xRaquete, yRaquete);
-    mostraRaquete(xRaqueteOponente, yRaqueteOponente);
-    movimentaRaqueteOponente();
-    colisãoRaquete(xRaqueteOponente, yRaqueteOponente);
-    incluiPlacar();
-    marcaPonto();
+  background("Pink");
+  mostraBolinha();
+  movimentaBolinha();
+  colisãoBorda();
+  mostraRaquete(xRaquete, yRaquete);
+  movimentaRaquete();
+  colisãoRaquete(xRaquete, yRaquete);
+  mostraRaquete(xRaqueteOponente, yRaqueteOponente);
+  movimentaRaqueteOponente();
+  colisãoRaquete(xRaqueteOponente, yRaqueteOponente);
+  incluiPlacar();
+  marcaPonto();
 }
 
-function mostraBolinha(){
+function mostraBolinha() {
   circle(xBolinha, yBolinha, diâmetro);
 }
 
-function movimentaBolinha(){
+function movimentaBolinha() {
   xBolinha += velocidadexBolinha;
   yBolinha += velocidadeyBolinha;
 }
 
-function colisãoBorda(){
-  if (xBolinha + raio > width ||
-    xBolinha -raio < 0)
-  {velocidadexBolinha *= -1;
+function colisãoBorda() {
+  if (xBolinha + raio > width || xBolinha - raio < 0) {
+    velocidadexBolinha *= -1;
   }
-  
-  if (yBolinha +raio > height ||
-     yBolinha - raio < 0){
+
+  if (yBolinha + raio > height || yBolinha - raio < 0) {
     velocidadeyBolinha *= -1;
   }
-  
 }
 
-
-function mostraRaquete(x, y){
+function mostraRaquete(x, y) {
   rect(x, y, raqueteComprimento, raqueteAltura);
 }
 
-function movimentaRaquete(){
-  if (keyIsDown(UP_ARROW)){
+function movimentaRaquete() {
+  if (keyIsDown(UP_ARROW)) {
     yRaquete -= 10;
-}
-  if (keyIsDown(DOWN_ARROW)){
+  }
+  if (keyIsDown(DOWN_ARROW)) {
     yRaquete += 10;
-}
+  }
+
+  // Evitar que a raquete saia da tela
+  yRaquete = constrain(yRaquete, 0, height - raqueteAltura);
 }
 
-function movimentaRaqueteOponente(){
-  if (keyIsDown(87)){
+function movimentaRaqueteOponente() {
+  if (keyIsDown(87)) {
     yRaqueteOponente -= 10;
-}
-  if (keyIsDown(83)){
-    yRaqueteOponente += 10;  
-}
-}
+  }
+  if (keyIsDown(83)) {
+    yRaqueteOponente += 10;
+  }
 
-function colisãoRaquete(){
-  if (xBolinha - raio - xRaquete + raqueteCpmprimento && yBolinha + raio > yRaquete0){velocidadexBolinha *= -1;
-    raquetada.play();                                       }
+  // Evitar que a raquete saia da tela
+  yRaqueteOponente = constrain(yRaqueteOponente, 0, height - raqueteAltura);
 }
 
 function colisãoRaquete(x, y) {
-    colidiu = collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio);
-    if (colidiu){velocidadexBolinha *= -1;
+  if (
+    (xBolinha - raio <= x + raqueteComprimento && xBolinha - raio >= x) &&
+    (yBolinha + raio >= y && yBolinha - raio <= y + raqueteAltura)
+  ) {
+    velocidadexBolinha *= -1;
     raquetada.play();
-    }
+  }
 }
 
-function incluiPlacar(){
-  stroke(255)
+function incluiPlacar() {
+  stroke(255);
   textAlign(CENTER);
   textSize(16);
   fill(color(255, 140, 0));
@@ -126,12 +125,15 @@ function incluiPlacar(){
   rect(1150, 14, 40, 20);
   fill(255);
   text(pontosDoOponente, 1170, 30);
-    }
+}
 
-function marcaPonto(){
-  if (xBolinha > 1290){meusPontos += 1;
-  ponto.play();
+function marcaPonto() {
+  if (xBolinha > 1290) {
+    meusPontos += 1;
+    ponto.play();
   }
-  if (xBolinha < 11){pontosDoOponente += 1;
-  ponto.play();}
+  if (xBolinha < 11) {
+    pontosDoOponente += 1;
+    ponto.play();
+  }
 }
